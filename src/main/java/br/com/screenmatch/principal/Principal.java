@@ -47,10 +47,6 @@ public class Principal {
 
         temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
-//        List<String> nomes = Arrays.asList("Jacque", "Iasmin", "Paulo", "Rodrigo", "Nico");
-//
-//        nomes.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase())
-//                .forEach(System.out::println);
         List<DadosEpisodio> dadosEpisodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream())
                         .collect(Collectors.toList());
@@ -74,32 +70,32 @@ public class Principal {
 
         episodios.forEach(System.out::println);
 
-//        System.out.println("Digite um trecho do titulo procurado");
-//        var trechoTitulo = leitura.nextLine();
-//        Optional<Episodio> episodioBuscado = episodios.stream()
-//                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
-//                .findFirst();
-//        if (episodioBuscado.isPresent()) {
-//            System.out.println("Episodio encontrado!");
-//            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
-//        } else {
-//            System.out.println("Episodio não encontrado");
-//        }
+        System.out.println("Digite um trecho do titulo procurado");
+        var trechoTitulo = leitura.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+                .findFirst();
+        if (episodioBuscado.isPresent()) {
+            System.out.println("Episodio encontrado!");
+            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
+        } else {
+            System.out.println("Episodio não encontrado");
+        }
 
-//        System.out.println("A partir de que ano vocé deseja ver os episodios?");
-//        var ano = leitura.nextInt();
-//        leitura.nextLine();
-//
-//        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
-//
-//        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        episodios.stream()
-//                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
-//                .forEach(e -> System.out.println(
-//                        "Temporada:  " + e.getTemporada() +
-//                                " Episodio: " + e.getTitulo() +
-//                                " Data de Lançamento: " + e.getDataLancamento()
-//                ));
+        System.out.println("A partir de que ano vocé deseja ver os episodios?");
+        var ano = leitura.nextInt();
+        leitura.nextLine();
+
+        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        episodios.stream()
+                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
+                .forEach(e -> System.out.println(
+                        "Temporada:  " + e.getTemporada() +
+                                " Episodio: " + e.getTitulo() +
+                                " Data de Lançamento: " + e.getDataLancamento()
+                ));
 
         Map<Integer, Double> avaliacoesPorTemporada = episodios.stream()
                 .filter(e -> e.getAvaliacao() > 0.0)
